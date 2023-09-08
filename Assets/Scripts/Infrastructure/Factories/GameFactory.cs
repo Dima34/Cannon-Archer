@@ -1,4 +1,5 @@
 using Infrastructure.Constants;
+using Infrastructure.Logic;
 using UnityEngine;
 using Zenject;
 
@@ -18,5 +19,8 @@ namespace Infrastructure.Factories
         
         public GameObject CreateMap() =>
             _container.InstantiatePrefabResource(ResourcePaths.MAP);
+
+        public Bullet CreateBullet() =>
+            _container.InstantiatePrefabResource(ResourcePaths.BULLET).GetComponent<Bullet>();
     }
 }

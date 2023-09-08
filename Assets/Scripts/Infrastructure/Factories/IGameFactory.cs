@@ -1,3 +1,4 @@
+using Infrastructure.Logic;
 using UnityEngine;
 
 namespace Infrastructure.Factories
@@ -6,5 +7,6 @@ namespace Infrastructure.Factories
     {
         GameObject CreatePlayer();
         GameObject CreateMap();
+        Bullet CreateBullet();
     }
 }

@@ -8,5 +8,6 @@ namespace Infrastructure.Constants
         public static string MAP = "Map";
         public static string ROOT_CANVAS = "UI/RootCanvas";
         public static string HUD = "UI/HUD";
+        public static string BULLET = "Bullet";
     }
 }

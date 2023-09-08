@@ -19,10 +19,10 @@ namespace Infrastructure.Services.Input
         }
 
         protected override bool IsFireTap() =>
-            IsScreenTouched() || IsSpacebarDown();
+            IsScreenTouched() || IsSpacebarUp();
 
-        private bool IsSpacebarDown() =>
-            UnityEngine.Input.GetKey(SPACE_KEYCODE);
+        private bool IsSpacebarUp() =>
+            UnityEngine.Input.GetKeyUp(SPACE_KEYCODE);
 
         private static bool IsScreenTouched() =>
             UnityEngine.Input.touchCount > 0;
