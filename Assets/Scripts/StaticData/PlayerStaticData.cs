@@ -8,6 +8,7 @@ namespace StaticData
         public float RotationSpeed;
         public float MinBarrelAngle;
         public float MaxBarrelAngle;
-        public float BulletSpeed;
+        public float MinBulletSpeed;
+        public float MaxBulletSpeed;
     }
 }

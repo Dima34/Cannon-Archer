@@ -45,12 +45,9 @@ namespace Infrastructure.Logic
         private void ApplyVerticalAngle()
         {
             float verticalAngle =
-                -PersentageToLimitedRange(_inputService.VerticalPercentage, _minBarrelAngle, _maxBarrelAngle);
+                -Helpers.PercentageToLimitedRange(_inputService.VerticalPercentage, _minBarrelAngle, _maxBarrelAngle);
             _barrel.localRotation = Quaternion.Euler(verticalAngle, 0, 0);
         }
-
-        private float PersentageToLimitedRange(float percentage, float minValue, float maxValue) =>
-            (percentage / 100) * (maxValue - minValue) + minValue;
 
         private void ApplyHorizontalRotation()
         {

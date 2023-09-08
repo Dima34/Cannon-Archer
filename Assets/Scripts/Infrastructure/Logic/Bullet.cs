@@ -1,18 +1,19 @@
-using Infrastructure.Services.StaticData;
 using UnityEngine;
-using Zenject;
 
 namespace Infrastructure.Logic
 {
     public class Bullet : MonoBehaviour
     {
-        private float _speed;
         private float _startTime;
         private Vector3 _startPosition;
+        private float _speed;
 
-        [Inject]
-        public void Construct(IStaticDataService staticDataService) =>
-            _speed = staticDataService.GetPlayerData().BulletSpeed;
+        public void Initialize(Vector3 pos, Quaternion rot,float speed)
+        {
+            transform.position = pos;
+            transform.rotation = rot;
+            _speed = speed;
+        }
 
         private void Start()
         {

@@ -1,6 +1,8 @@
+using System;
 using Infrastructure.Factories;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -12,9 +14,12 @@ namespace Infrastructure.Logic
 
         private IInputService _inputService;
         private IGameFactory _gameFactory;
-        private float _speed;
+        private float _minBulletSpeed;
+        private float _maxBulletSpeed;
         Vector3[] trajectoryPoints = new Vector3[TRAJECTORY_POINTS_AMOUNT];
-        
+        private Vector3 _muzzleEnd;
+        private PlayerStaticData _playerData;
+
         private const int TRAJECTORY_POINTS_AMOUNT = 100;
 
         [Inject]
@@ -23,7 +28,15 @@ namespace Infrastructure.Logic
         {
             _gameFactory = gameFactory;
             _inputService = inputService;
-            _speed = staticDataService.GetPlayerData().BulletSpeed;
+            _playerData = staticDataService.GetPlayerData();
+        }
+
+        private void Start()
+        {
+            _minBulletSpeed = _playerData.MinBulletSpeed;
+            _maxBulletSpeed = _playerData.MaxBulletSpeed;
+
+            _muzzleEnd = transform.position + transform.forward;
         }
 
         private void Update()
@@ -37,12 +50,12 @@ namespace Infrastructure.Logic
         private void RenderTrajectory()
         {
             _lineRenderer.positionCount = trajectoryPoints.Length;
-            Vector3 startPosition = transform.position + transform.forward;
+            Vector3 startPosition = _muzzleEnd;
             
             for (int i = 0; i < trajectoryPoints.Length; i++)
             {
                 float time = i * 0.1f;
-                trajectoryPoints[i] = BasicPhysics.BallisticTrajectory(startPosition, transform.forward, time, _speed);
+                trajectoryPoints[i] = BasicPhysics.BallisticTrajectory(startPosition, transform.forward, time, GetSpeed());
 
                 if (TrajectoryUnderGround(i))
                 {
@@ -54,6 +67,9 @@ namespace Infrastructure.Logic
             _lineRenderer.SetPositions(trajectoryPoints);
         }
 
+        private float GetSpeed() =>
+            Helpers.PercentageToLimitedRange(_inputService.VerticalPercentage, _minBulletSpeed, _maxBulletSpeed);
+
         private bool TrajectoryUnderGround(int i) =>
             trajectoryPoints[i]. y < 0;
 
@@ -63,8 +79,7 @@ namespace Infrastructure.Logic
         private void Shoot()
         {
             Bullet bullet = _gameFactory.CreateBullet();
-            bullet.transform.position = transform.position + transform.forward;
-            bullet.transform.rotation = transform.rotation;
+            bullet.Initialize(_muzzleEnd, transform.rotation, GetSpeed());
         }
     }
 }

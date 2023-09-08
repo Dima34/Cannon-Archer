@@ -15,4 +15,5 @@ MonoBehaviour:
   RotationSpeed: 10
   MinBarrelAngle: 0
   MaxBarrelAngle: 45
-  BulletSpeed: 15
+  MinBulletSpeed: 5
+  MaxBulletSpeed: 45
