@@ -17,7 +17,6 @@ namespace Infrastructure.Logic
         private float _minBulletSpeed;
         private float _maxBulletSpeed;
         Vector3[] trajectoryPoints = new Vector3[TRAJECTORY_POINTS_AMOUNT];
-        private Vector3 _muzzleEnd;
         private PlayerStaticData _playerData;
 
         private const int TRAJECTORY_POINTS_AMOUNT = 100;
@@ -35,8 +34,6 @@ namespace Infrastructure.Logic
         {
             _minBulletSpeed = _playerData.MinBulletSpeed;
             _maxBulletSpeed = _playerData.MaxBulletSpeed;
-
-            _muzzleEnd = transform.position + transform.forward;
         }
 
         private void Update()
@@ -50,7 +47,7 @@ namespace Infrastructure.Logic
         private void RenderTrajectory()
         {
             _lineRenderer.positionCount = trajectoryPoints.Length;
-            Vector3 startPosition = _muzzleEnd;
+            Vector3 startPosition = transform.position;
             
             for (int i = 0; i < trajectoryPoints.Length; i++)
             {
@@ -79,7 +76,7 @@ namespace Infrastructure.Logic
         private void Shoot()
         {
             Bullet bullet = _gameFactory.CreateBullet();
-            bullet.Initialize(_muzzleEnd, transform.rotation, GetSpeed());
+            bullet.Initialize(transform.position, transform.rotation, GetSpeed());
         }
     }
 }
