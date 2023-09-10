@@ -8,6 +8,7 @@ namespace Infrastructure.Logic
         [SerializeField] private int _minSpeedDebuffPerc;
         [SerializeField] private int _ricochetAngle;
         [SerializeField] private int _maxCollisionsCount;
+        [SerializeField] private float _lifeTime;
         
         private float _startTime;
         private Vector3 _startPosition;
@@ -22,8 +23,14 @@ namespace Infrastructure.Logic
             _speed = speed;
         }
 
-        private void Start() =>
+        private void Start()
+        {
             ResetStartTimeAndPosition();
+            StartDestroySelfProcess();
+        }
+
+        private void StartDestroySelfProcess() =>
+            Destroy(gameObject, _lifeTime);
 
         private void ResetStartTimeAndPosition()
         {
