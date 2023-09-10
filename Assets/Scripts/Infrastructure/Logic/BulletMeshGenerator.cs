@@ -6,6 +6,7 @@ namespace Infrastructure.Logic
     public class BulletMeshGenerator : MonoBehaviour
     {
         [SerializeField] private MeshFilter _meshFilter;
+        [SerializeField] private MeshRenderer _meshRenderer;
 
         private void Start() =>
             GenerateRandomBullet();
@@ -17,7 +18,7 @@ namespace Infrastructure.Logic
             mesh.vertices = GenerateRandomVertices();
             mesh.triangles = GetCubeTriangles();
             mesh.RecalculateNormals();
-
+            
             _meshFilter.mesh = mesh;
         }
 

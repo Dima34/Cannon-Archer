@@ -59,15 +59,14 @@ namespace Infrastructure.Logic
             float shootAngle = Vector3.Angle(-collidedObj.transform.up, inDirecion);
             float speedDebuffPercentage = Helpers.LinearTransform(shootAngle, 1, _maxSpeedDebuffPerc, 180, _minSpeedDebuffPerc);
             _speed = _speed - (_speed / 100 * speedDebuffPercentage);
-            Debug.Log($"Angle {shootAngle}");
-            Debug.Log($"Debuff {speedDebuffPercentage}");
-
+            
             _collisionsCount++;
             
             Debug.DrawRay(transform.position, collidedObjNormal, Color.blue, 5);
             Debug.DrawRay(transform.position, reflectedVector, Color.green, 5);
             Debug.DrawRay(transform.position, inDirecion, Color.red, 5);
-            
+            Debug.Log($"Angle {shootAngle}");
+            Debug.Log($"Debuff {speedDebuffPercentage}");
         }
 
         private void DestroySelf() =>
