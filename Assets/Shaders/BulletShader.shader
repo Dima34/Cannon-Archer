@@ -42,5 +42,30 @@ Shader "Custom/BulletShader"
             }
             ENDCG
         }
+
+        Pass
+        {
+            Tags { "LightMode"="ShadowCaster" }
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            struct appdata_t
+            {
+                float4 vertex : POSITION;
+            };
+
+            half4 vert (appdata_t v) : SV_POSITION
+            {
+                return UnityObjectToClipPos(v.vertex);
+            }
+
+            half4 frag (void) : SV_Target
+            {
+                return 1;
+            }
+            ENDCG
+        }
     }
 }
