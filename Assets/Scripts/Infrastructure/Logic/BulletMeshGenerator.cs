@@ -6,7 +6,10 @@ namespace Infrastructure.Logic
     public class BulletMeshGenerator : MonoBehaviour
     {
         [SerializeField] private MeshFilter _meshFilter;
-        [SerializeField] private MeshRenderer _meshRenderer;
+
+        private const int CUBE_VERTICES_COUNT = 8;
+        private const int CUBE_VERTICIES_DEEP = 2;
+        private const float DISTANCE_FROM_CENTER_DIVIDER = 1.5f;
 
         private void Start() =>
             GenerateRandomBullet();
@@ -18,15 +21,15 @@ namespace Infrastructure.Logic
             mesh.vertices = GenerateRandomVertices();
             mesh.triangles = GetCubeTriangles();
             mesh.RecalculateNormals();
-            
+
             _meshFilter.mesh = mesh;
         }
 
         private Vector3[] GenerateRandomVertices()
         {
-            Vector3[] vertices = new Vector3[8];
+            Vector3[] vertices = new Vector3[CUBE_VERTICES_COUNT];
             float cubeHalfSize = transform.localScale.x / 2;
-            int cubeVerticesDeep = 2;
+            int cubeVerticesDeep = CUBE_VERTICIES_DEEP;
             var centerPosition = transform.localPosition;
 
             int index = 0;
@@ -40,7 +43,7 @@ namespace Infrastructure.Logic
                 Vector3 randomPointPos = new Vector3();
                 for (int i = 0; i < 3; i++)
                 {
-                    Vector3 startPoint = centerPosition - pointFromCenterDir / 2;
+                    Vector3 startPoint = centerPosition - pointFromCenterDir / DISTANCE_FROM_CENTER_DIVIDER;
                     randomPointPos[i] = Random.Range(startPoint[i], pointPos[i]);
                 }
 
