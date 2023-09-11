@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 798562340773283951}
   - component: {fileID: 798562340773283948}
   - component: {fileID: 798562340773283949}
+  - component: {fileID: 6313758187114042890}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -97,6 +98,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6313758187114042890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798562340773283947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50cb4b6c4ed48e883aba7f2e2b17050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveDistance: {x: 0, y: 0, z: -0.2}
+  _speed: 20
 --- !u!1 &798562341140494131
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,8 +352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 798562341501280668}
-  shakeDuration: 0.2
-  shakeAmount: 0.02
+  _shakeDuration: 0.2
+  _shakeAmount: 0.02
 --- !u!1 &3528705309403227938
 GameObject:
   m_ObjectHideFlags: 0
