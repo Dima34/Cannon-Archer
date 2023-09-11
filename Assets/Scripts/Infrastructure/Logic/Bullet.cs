@@ -79,12 +79,6 @@ namespace Infrastructure.Logic
             _speed = _speed - (_speed / 100 * speedDebuffPercentage);
             
             _collisionsCount++;
-            
-            Debug.DrawRay(transform.position, collidedObjNormal, Color.blue, 5);
-            Debug.DrawRay(transform.position, reflectedVector, Color.green, 5);
-            Debug.DrawRay(transform.position, inDirecion, Color.red, 5);
-            Debug.Log($"Angle {shootAngle}");
-            Debug.Log($"Debuff {speedDebuffPercentage}");
         }
 
         private void DestroySelf(Vector3 surfaceNormalDirecion)
