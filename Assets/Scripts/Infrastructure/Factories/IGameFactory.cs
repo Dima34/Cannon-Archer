@@ -8,5 +8,6 @@ namespace Infrastructure.Factories
         GameObject CreatePlayer();
         GameObject CreateMap();
         Bullet CreateBullet();
+        GameObject CreateExplosion();
     }
 }

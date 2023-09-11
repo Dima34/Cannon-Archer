@@ -154,9 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59fb511a099476da991e25dbc965be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeedDebuffPerc: 85
+  _maxSpeedDebuffPerc: 70
   _minSpeedDebuffPerc: 1
-  _ricochetAngle: 20
   _maxCollisionsCount: 1
   _lifeTime: 8
 --- !u!114 &5265508558660094321

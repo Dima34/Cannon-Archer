@@ -22,5 +22,9 @@ namespace Infrastructure.Factories
 
         public Bullet CreateBullet() =>
             _container.InstantiatePrefabResource(ResourcePaths.BULLET).GetComponent<Bullet>();
+        
+        public GameObject CreateExplosion() =>
+            _container.InstantiatePrefabResource(ResourcePaths.EXPLOSION);
+        
     }
 }

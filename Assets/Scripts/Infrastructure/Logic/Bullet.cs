@@ -1,4 +1,7 @@
+using System.Collections;
+using Infrastructure.Factories;
 using UnityEngine;
+using Zenject;
 
 namespace Infrastructure.Logic
 {
@@ -6,7 +9,6 @@ namespace Infrastructure.Logic
     {
         [SerializeField] private int _maxSpeedDebuffPerc;
         [SerializeField] private int _minSpeedDebuffPerc;
-        [SerializeField] private int _ricochetAngle;
         [SerializeField] private int _maxCollisionsCount;
         [SerializeField] private float _lifeTime;
         
@@ -15,6 +17,12 @@ namespace Infrastructure.Logic
         private Vector3 _prevPos;
         private float _speed;
         private int _collisionsCount;
+        private IGameFactory _gameFactory;
+        private Coroutine _selfDestroyCoroutine;
+
+        [Inject]
+        public void Construct(IGameFactory gameFactory) =>
+            _gameFactory = gameFactory;
 
         public void Initialize(Vector3 pos, Quaternion rot, float speed)
         {
@@ -29,8 +37,10 @@ namespace Infrastructure.Logic
             StartDestroySelfProcess();
         }
 
-        private void StartDestroySelfProcess() =>
-            Destroy(gameObject, _lifeTime);
+        private void StartDestroySelfProcess()
+        {
+            _selfDestroyCoroutine = StartCoroutine(DelayedSelfDestroy());
+        }
 
         private void ResetStartTimeAndPosition()
         {
@@ -54,10 +64,11 @@ namespace Infrastructure.Logic
 
         private void Ricochet(Collider collidedObj, Vector3 inDirecion)
         {
-            if (_collisionsCount >= _maxCollisionsCount) 
-                DestroySelf();
-
             Vector3 collidedObjNormal = collidedObj.transform.up;
+            
+            if (_collisionsCount >= _maxCollisionsCount) 
+                DestroySelf(-collidedObjNormal);
+
             Vector3 reflectedVector = Vector3.Reflect( -inDirecion, collidedObjNormal);
 
             ResetStartTimeAndPosition();
@@ -76,13 +87,29 @@ namespace Infrastructure.Logic
             Debug.Log($"Debuff {speedDebuffPercentage}");
         }
 
-        private void DestroySelf() =>
+        private void DestroySelf(Vector3 surfaceNormalDirecion)
+        {
+            if (_selfDestroyCoroutine != null)
+            {
+                StopCoroutine(_selfDestroyCoroutine);
+                _selfDestroyCoroutine = null;
+            }
+            
+            GameObject explosion = _gameFactory.CreateExplosion();
+            explosion.transform.position = transform.position;
+            explosion.transform.up = surfaceNormalDirecion;
             Destroy(gameObject);
-
-        private bool IsRicochet(float hitAngle) =>
-            hitAngle > _ricochetAngle;
+        }
 
         private Vector3 GetFlyDirection() =>
             _prevPos - transform.position;
+
+        private IEnumerator DelayedSelfDestroy()
+        {
+            yield return new WaitForSecondsRealtime(_lifeTime);
+            DestroySelf(Vector3.zero);
+
+            _selfDestroyCoroutine = null;
+        }
     }
 }
