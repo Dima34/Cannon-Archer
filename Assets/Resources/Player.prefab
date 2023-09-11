@@ -285,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 798562341560227165}
   - component: {fileID: 798562341560227164}
+  - component: {fileID: 945522811941394569}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -323,6 +324,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerRoot: {fileID: 798562341560227165}
   _barrel: {fileID: 1431720901936188459}
+--- !u!114 &945522811941394569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798562341560227162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128e3dedf0e548e698c06bfdc1a8839b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 798562341501280668}
+  shakeDuration: 0.2
+  shakeAmount: 0.02
 --- !u!1 &3528705309403227938
 GameObject:
   m_ObjectHideFlags: 0
