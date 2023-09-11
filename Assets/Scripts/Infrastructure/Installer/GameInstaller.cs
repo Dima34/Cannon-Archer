@@ -2,6 +2,7 @@ using Infrastructure.Factories;
 using Infrastructure.Factories.UI;
 using Infrastructure.Services.CoroutineRunner;
 using Infrastructure.Services.Input;
+using Infrastructure.Services.TextureDrawService;
 using Infrastructure.StateMachines.GameStateMachine;
 using Infrastructure.StateMachines.GameStateMachine.States;
 using UnityEngine;
@@ -18,10 +19,11 @@ namespace Infrastructure.Installer
             BindInputService();
             BindGameFactory();
             BindUIFactory();
+            BindTextureDrawService();
             BindStateMachineStatesFactory();
             BindGameStateMachine();
         }
-        
+
         private void BindCoroutineRunner() =>
             Container
                 .BindInterfacesAndSelfTo<CoroutineRunnerService>()
@@ -49,17 +51,25 @@ namespace Infrastructure.Installer
                 .AsSingle();
         }
 
+        private void BindGameFactory() =>
+            Container
+                .Bind<IGameFactory>()
+                .To<GameFactory>()
+                .AsSingle();
+
         private void BindUIFactory() =>
             Container
                 .Bind<IUIFactory>()
                 .To<UIFactory>()
                 .AsSingle();
 
-        private void BindGameFactory() =>
+        private void BindTextureDrawService()
+        {
             Container
-                .Bind<IGameFactory>()
-                .To<GameFactory>()
+                .Bind<ITextureDrawService>()
+                .To<TextureDrawService>()
                 .AsSingle();
+        }
 
         private void BindStateMachineStatesFactory()
         {

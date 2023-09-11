@@ -1,4 +1,4 @@
-Shader "Custom/Paint Diffuse"
+Shader "Custom/DrawableShader"
 {
 
     Properties

@@ -2,6 +2,6 @@ namespace Infrastructure.Constants
 {
     public class Tags
     {
-        public static string PLAYER_SPAWN_POINT = "PlayerStart";
+        public const string DRAWABLE_TAG = "ShaderDrawable";
     }
 }

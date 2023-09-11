@@ -171,5 +171,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e508b16cd8e54b65b6873339eb4f9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _drawSize: 32
+  _drawSize: 24
   _drawTexture: {fileID: 2800000, guid: 9c86e760f1c7e463fadf41ffb375ef84, type: 3}
