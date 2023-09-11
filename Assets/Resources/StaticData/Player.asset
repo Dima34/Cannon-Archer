@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881183cdd5b040c8820054b9f552534e, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  RotationSpeed: 10
+  RotationSpeed: 20
   MinBarrelAngle: 0
   MaxBarrelAngle: 45
   MinBulletSpeed: 5

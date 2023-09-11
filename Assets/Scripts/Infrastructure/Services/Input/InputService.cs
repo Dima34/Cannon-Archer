@@ -7,19 +7,14 @@ namespace Infrastructure.Services.Input
     {
         public float XAxis => GetXAxis();
         public float VerticalPercentage => GetVerticalPercentage();
-
-        public bool OnFireTap => IsFireTap();
+        public bool IsFireTap => GetFireTap();
 
         protected float _verticalPercentage;
+        protected bool _fireTap;
 
         protected abstract float GetXAxis();
-
         protected abstract float GetVerticalPercentage();
-
-        public void SetVerticalPercentage(float percentage) =>
-            _verticalPercentage = percentage;
-
-        protected abstract bool IsFireTap();
+        protected abstract bool GetFireTap();
 
         protected static Vector2 GetTouchDeltaPosition()
         {
@@ -28,10 +23,24 @@ namespace Infrastructure.Services.Input
             return touchDeltaPosition;
         }
 
+        public void SetVerticalPercentage(float percentage) =>
+            _verticalPercentage = percentage;
+
+        public void SetFireTap(bool state) =>
+            _fireTap = state;
+
         internal static float GetTouchOnScreenPercent()
         {
             Vector2 touchDeltaPosition = GetTouchDeltaPosition();
             return touchDeltaPosition.x / Screen.width * 100;
         }
+        
+        protected static bool IsScreenTouched()
+        {
+            return UnityEngine.Input.touchCount > 0;
+        }
+
+        protected static bool TouchEnded() =>
+            UnityEngine.Input.touches[0].phase == TouchPhase.Stationary;
     }
 }

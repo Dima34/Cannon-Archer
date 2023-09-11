@@ -28,7 +28,7 @@ namespace Infrastructure.Logic
 
         private void Update()
         {
-            if (_inputService.OnFireTap && ShakeNotPlaying())
+            if (_inputService.IsFireTap && ShakeNotPlaying())
                 Shake();
         }
 

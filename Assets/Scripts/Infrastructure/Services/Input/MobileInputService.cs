@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Infrastructure.Services.Input
 {
     public class MobileInputService : InputService
@@ -8,7 +10,7 @@ namespace Infrastructure.Services.Input
         protected override float GetVerticalPercentage() =>
             _verticalPercentage;
 
-        protected override bool IsFireTap() =>
-            UnityEngine.Input.touchCount > 0;
+        protected override bool GetFireTap() =>
+            IsScreenTouched() && TouchEnded();
     }
 }

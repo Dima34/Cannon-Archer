@@ -33,13 +33,17 @@ namespace Infrastructure.Services.Input
             return _verticalPercentage;
         }
 
-        protected override bool IsFireTap() =>
-            IsScreenTouched() || IsSpacebarUp();
+        protected override bool GetFireTap()
+        {
+            if (IsSpacebarUp())
+                return true;
+
+            return _fireTap;
+        }
 
         private bool IsSpacebarUp() =>
             UnityEngine.Input.GetKeyUp(SPACE_KEYCODE);
 
-        private static bool IsScreenTouched() =>
-            UnityEngine.Input.touchCount > 0;
+        
     }
 }

@@ -17,7 +17,7 @@ public class CannonRecoilAnim : MonoBehaviour
 
     private void Update()
     {
-        if (_inputService.OnFireTap && AnimNotRunning()) 
+        if (_inputService.IsFireTap && AnimNotRunning()) 
             _animCoroutine = StartCoroutine(Recoil());
     }
 

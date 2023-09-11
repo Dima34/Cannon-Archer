@@ -71,7 +71,7 @@ namespace Infrastructure.Logic
             trajectoryPoints[i]. y < 0;
 
         private bool IsFireTapped() =>
-            _inputService.OnFireTap;
+            _inputService.IsFireTap;
 
         private void Shoot()
         {
