@@ -11,6 +11,6 @@ namespace Infrastructure.Services.Input
             _verticalPercentage;
 
         protected override bool GetFireTap() =>
-            IsScreenTouched() && TouchEnded();
+            _fireTap;
     }
 }
