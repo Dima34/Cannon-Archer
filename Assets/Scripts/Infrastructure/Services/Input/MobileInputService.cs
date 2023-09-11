@@ -5,6 +5,9 @@ namespace Infrastructure.Services.Input
         protected override float GetXAxis() =>
             GetTouchOnScreenPercent();
 
+        protected override float GetVerticalPercentage() =>
+            _verticalPercentage;
+
         protected override bool IsFireTap() =>
             UnityEngine.Input.touchCount > 0;
     }

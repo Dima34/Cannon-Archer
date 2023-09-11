@@ -6,13 +6,16 @@ namespace Infrastructure.Services.Input
     public abstract class InputService : IInputService
     {
         public float XAxis => GetXAxis();
-        public float VerticalPercentage => _verticalPercentage;
+        public float VerticalPercentage => GetVerticalPercentage();
 
         public bool OnFireTap => IsFireTap();
-        private float _verticalPercentage;
+
+        protected float _verticalPercentage;
 
         protected abstract float GetXAxis();
-        
+
+        protected abstract float GetVerticalPercentage();
+
         public void SetVerticalPercentage(float percentage) =>
             _verticalPercentage = percentage;
 
